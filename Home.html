@@ -32,7 +32,10 @@
 		</div>
   </body>
 	<script type = "module">
+////IMPORTS
 		import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
+	
+////CLASSES
 		class Project
 		{
 			constructor(name, description, link)
@@ -42,9 +45,11 @@
 				this.link = link;
 			}
 		}
-		
+	
+////VARIABLES
 		var projects = [];
 		
+////FUNCTIONS
 		async function getRepoData()
 		{
 			const octokit = new Octokit
@@ -54,13 +59,14 @@
 			
 			for (var x in result.data)
 			{
-					const project = new Project(result.data[x].name, result.data[x].description, result.data[x].html_url);
+				const project = new Project(result.data[x].name, result.data[x].description, result.data[x].html_url);
+				if (result.data[x].name != "ProjectWebsite")
+				{
 					projects.push(project);
 					document.getElementById("projects").innerHTML += "<li id = '" + project.name + "'>" + project.name + "</li>";
+				}
 			}
 		}
-			
-		getRepoData();
 		
 		function getEventTarget(e)
 		{
@@ -68,20 +74,22 @@
 			return e.target || e.srcElement; 
 		}
 
-		var ul = document.getElementById("projects");
-		ul.onclick = function(event)
+		document.getElementById("projects").onclick = function(event)
 		{
 			var target = getEventTarget(event);
-			for (var x in projects)
+			for (var project in projects)
 			{
-				if (target.innerHTML == projects[x].name)
+				if (target.innerHTML == projects[project].name)
 				{
-					document.getElementById("projectName").innerHTML = projects[x].name;
-					document.getElementById("description").innerHTML = projects[x].description;
-					document.getElementById("link").innerHTML = projects[x].link;
+					document.getElementById("projectName").innerHTML = projects[project].name;
+					document.getElementById("description").innerHTML = projects[project].description;
+					document.getElementById("link").innerHTML = projects[project].link;
 				}
 			}
 		};
+		
+////MAIN
+		getRepoData();
 	</script>
 </html>
 
