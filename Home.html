@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+		<meta charset = "utf-8"/>
+		<html lang = "en">
+		<link rel = "stylesheet" href = "Home.css">
+  </head>
+  <body>
+		<div class = "split left">
+			<img class = "profilePicture" src="images/ProfilePicture.png" alt="ProfilePicture.png">
+			<div class = "center">
+				<p>Hello, I'm</p>
+				<h2>Lachlan Matthews</h2>
+			</div>
+			<div class = "bottom">
+				<a href = "https://github.com/LachlanMatthews"><img class = "contact" src="images/GitHub.png" alt="GitHub.png"></a>
+				<a href = "https://www.linkedin.com/in/lachlan-matthews-32766b235/"><img class = "contact" src="images/LinkedIn.png" alt="LinkedIn.png"></a>
+				<span class = "contact">Lachlan&#8209;Matthews@outlook.com</span>
+			</div>
+		</div>
+		<div class = "split right">
+			<div class = "list">
+				<h3>Projects</h3>
+				<ul id = "projects">
+				</ul>
+			</div>
+			<div class = "description">
+				<h3 id = "projectName"></h3>
+				<p id = "description"></p>
+				<p id = "link"></p>
+			</div>
+		</div>
+  </body>
+	<script>
+		class Project
+		{
+			constructor(name, description, link)
+			{
+				this.name = name;
+				this.description = description;
+				this.link = link;
+			}
+		}
+		
+		var projects = [];
+		
+		function getRepoData()
+		{
+			const request = new XMLHttpRequest();
+			const url = `https:/api.github.com/users/LachlanMatthews/repos`;
+			request.open("GET", url, true);
+			request.onload = function()
+			{
+				const data = JSON.parse(this.response);
+				for (var x in data)
+				{
+					const project = new Project(data[x].name, data[x].description, data[x].html_url);
+					projects.push(project)
+					document.getElementById("projects").innerHTML += "<li id = '" + project.name + "'>" + project.name + "</li>";
+				}
+			}
+			request.send();
+		}
+			
+		getRepoData();
+		
+		function getEventTarget(e)
+		{
+			e = e || window.event;
+			return e.target || e.srcElement; 
+		}
+
+		var ul = document.getElementById("projects");
+		ul.onclick = function(event)
+		{
+			var target = getEventTarget(event);
+			for (var x in projects)
+			{
+				if (target.innerHTML == projects[x].name)
+				{
+					document.getElementById("projectName").innerHTML = projects[x].name;
+					document.getElementById("description").innerHTML = projects[x].description;
+					document.getElementById("link").innerHTML = projects[x].link;
+				}
+			}
+		};
+	</script>
+</html>
+
+
+

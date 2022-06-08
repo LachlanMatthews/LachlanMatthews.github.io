@@ -1,0 +1,90 @@
+@font-face { font-family: SourceCodePro; src: url('fonts/SourceCodePro-VariableFont_wght.ttf'); }
+body {
+	font-family: SourceCodePro;
+	margin: 0;
+}
+
+.split {
+	height: 100%;
+	position: fixed;
+}
+
+.left {
+	width: 15%;
+	background-color: #9FE295;
+	padding-top: 30px;
+	font-size: 1.5vw;
+}
+
+.right {
+	width: 85%;
+	right: 0;
+	background-color: #000000;
+	box-shadow: 5px 10px;
+}
+
+.list {
+	width: 25%;
+	height: 100%;
+	position: fixed;
+	text-align: center;
+	font-size: 1.5vw;
+	color: #FFFFFF;
+}
+
+.description {
+	width: 60%;
+	right: 0;
+	height: 100%;
+	position: fixed;
+	color: #FFFFFF;
+	font-size: 1.5vw;
+}
+
+h3 {
+	text-decoration: underline #9FE295;
+	text-align: center;
+}
+
+ul {
+    list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li:hover {
+	cursor: pointer;
+	color: #9FE295
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.bottom {
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.contact {
+	max-width:40%;
+	max-height:40%;
+	font-size: 0.8vw;
+}
+
+.profilePicture {
+	max-width:50%;
+	max-height:50%;
+	border-radius: 50%;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+	border: 0.2vw solid;
+}
