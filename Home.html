@@ -47,9 +47,7 @@
 		
 		async function getRepoData()
 		{
-			const octokit = new Octokit({
-				auth: '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'
-			})
+			const octokit = new Octokit
 			const result = await octokit.request('GET /users/LachlanMatthews/repos', {
 				username: 'LachlanMatthews'
 			})
