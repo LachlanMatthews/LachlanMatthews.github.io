@@ -31,7 +31,8 @@
 			</div>
 		</div>
   </body>
-	<script>
+	<script type = "module">
+		import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
 		class Project
 		{
 			constructor(name, description, link)
@@ -44,21 +45,21 @@
 		
 		var projects = [];
 		
-		function getRepoData()
+		async function getRepoData()
 		{
-			var request = new XMLHttpRequest();
-			request.open('get', 'https:/api.github.com/users/LachlanMatthews/repos');
-			request.onload = function()
+			const octokit = new Octokit({
+				auth: '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'
+			})
+			const result = await octokit.request('GET /users/LachlanMatthews/repos', {
+				username: 'LachlanMatthews'
+			})
+			
+			for (var x in result.data)
 			{
-				const data = JSON.parse(this.response);
-				for (var x in data)
-				{
-					const project = new Project(data[x].name, data[x].description, data[x].html_url);
+					const project = new Project(result.data[x].name, result.data[x].description, result.data[x].html_url);
 					projects.push(project);
 					document.getElementById("projects").innerHTML += "<li id = '" + project.name + "'>" + project.name + "</li>";
-				}
 			}
-			request.send();
 		}
 			
 		getRepoData();
