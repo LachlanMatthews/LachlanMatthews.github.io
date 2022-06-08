@@ -46,16 +46,15 @@
 		
 		function getRepoData()
 		{
-			const request = new XMLHttpRequest();
-			const url = `https:/api.github.com/users/LachlanMatthews/repos`;
-			request.open("GET", url, true);
+			var request = new XMLHttpRequest();
+			request.open('get', 'https:/api.github.com/users/LachlanMatthews/repos');
 			request.onload = function()
 			{
 				const data = JSON.parse(this.response);
 				for (var x in data)
 				{
 					const project = new Project(data[x].name, data[x].description, data[x].html_url);
-					projects.push(project)
+					projects.push(project);
 					document.getElementById("projects").innerHTML += "<li id = '" + project.name + "'>" + project.name + "</li>";
 				}
 			}
